@@ -8,9 +8,18 @@
 "dev": "nodemon server.js",
 "start": "node server.js"
 },
-"keywords": [],
-"author": "",
+"keywords": [
+"nodejs",
+"express",
+"mongodb",
+"crm",
+"support-ticket-system"
+],
+"author": "Piyush Khandait",
 "license": "ISC",
+"engines": {
+"node": ">=18"
+},
 "dependencies": {
 "cors": "^2.8.5",
 "dotenv": "^16.4.5",
