@@ -65,7 +65,7 @@ export function TicketDetail() {
       <div className="p-6 max-w-3xl mx-auto">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors mb-4"
+          className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 hover:text-slate:700 dark:hover:text-slate-200 transition-colors mb-4"
         >
           <ChevronLeft className="h-4 w-4" />
           Back
@@ -89,26 +89,34 @@ export function TicketDetail() {
   const handleStatusChange = async (status: TicketStatus) => {
     if (status === ticket.status) return;
     setUpdatingStatus(true);
-    await new Promise((r) => setTimeout(r, 400));
-    updateTicketStatus(ticket.id, status);
-    setUpdatingStatus(false);
-    toast.success(`Status updated to ${status.replace('_', ' ')}`);
+    try {
+      await updateTicketStatus(ticket.id, status);
+      toast.success(`Status updated to ${status.replace('_', ' ')}`);
+    } catch {
+      toast.error('Failed to update status.');
+    } finally {
+      setUpdatingStatus(false);
+    }
   };
 
   const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!commentText.trim()) return;
     setSubmittingComment(true);
-    await new Promise((r) => setTimeout(r, 500));
-    addComment(ticket.id, {
-      author: 'Alex Chen',
-      role: 'Support Agent',
-      content: commentText.trim(),
-      isInternal,
-    });
-    setCommentText('');
-    setSubmittingComment(false);
-    toast.success(isInternal ? 'Internal note added' : 'Reply sent');
+    try {
+      await addComment(ticket.id, {
+        author: 'Alex Chen',
+        role: 'Support Agent',
+        content: commentText.trim(),
+        isInternal,
+      });
+      setCommentText('');
+      toast.success(isInternal ? 'Internal note added' : 'Reply sent');
+    } catch {
+      toast.error('Failed to add comment.');
+    } finally {
+      setSubmittingComment(false);
+    }
   };
 
   return (
@@ -163,7 +171,6 @@ export function TicketDetail() {
               </div>
             ) : (
               <div className="space-y-3 mb-4">
-                {/* Created event */}
                 <div className="flex items-center gap-2.5 py-1">
                   <div className="h-5 w-5 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
                     <span className="h-1.5 w-1.5 rounded-full bg-slate-400 dark:bg-slate-500" />
@@ -173,7 +180,7 @@ export function TicketDetail() {
                   </p>
                 </div>
                 {ticket.comments.map((comment) => (
-                  <CommentCard key={comment.id} comment={comment} />
+                  <CommentCard key={comment._id} comment={comment} />
                 ))}
               </div>
             )}
