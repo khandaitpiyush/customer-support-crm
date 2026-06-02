@@ -15,10 +15,20 @@ connectDB();
 
 // Middleware
 app.use(
-cors({
-origin: process.env.CLIENT_URL || "*",
-credentials: true,
-})
+  cors({
+    origin: (origin, callback) => {
+      const allowed = [
+        "https://customer-support-crm.netlify.app",
+        "http://localhost:5173",
+      ];
+      if (!origin || allowed.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
 );
 
 app.use(express.json());
@@ -26,10 +36,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Health Check Route
 app.get("/health", (req, res) => {
-res.status(200).json({
-success: true,
-message: "Server is running",
-});
+  res.status(200).json({
+    success: true,
+    message: "Server is running",
+  });
 });
 
 // API Routes
@@ -43,5 +53,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
