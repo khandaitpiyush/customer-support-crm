@@ -1,176 +1,307 @@
+🎫 Customer Support Ticket CRM
 
-# Support CRM System
-
-A modern full-stack Customer Support Ticket CRM built with React, Node.js, Express, and MongoDB. The application allows teams to manage customer support tickets, track statuses, add notes/comments, and organize support workflows through a clean SaaS-style dashboard.
-
----
-
-# Features
-
-* Create Support Tickets
-* View All Tickets
-* Search Tickets
-* Filter by Status
-* Update Ticket Status
-* Add Notes & Comments
-* Responsive Dashboard UI
-* REST API Integration
-* MongoDB Database
-* Clean Modular Architecture
+A modern full-stack Customer Support Ticket CRM built with React, TypeScript, Node.js, Express, and MongoDB. The platform enables support teams to efficiently manage customer issues through ticket creation, status tracking, comments, filtering, and a clean SaaS-style dashboard.
 
 ---
 
-# Tech Stack
+🌐 Live Demo
 
-## Frontend
+Frontend
 
-* React
-* TypeScript
-* Tailwind CSS
-* React Router
-* Axios
-
-## Backend
-
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-
-## Deployment
-
-* Frontend: Netlify
-* Backend: Render
-* Database: MongoDB Atlas
+"https://customer-support-crm.netlify.app/" (https://customer-support-crm.netlify.app/)
 
 ---
 
-# Project Structure
+✨ Features
 
-```bash
-support-crm/
+Ticket Management
+
+- Create support tickets
+- View all tickets
+- View detailed ticket information
+- Update ticket status
+- Add internal notes/comments
+- Ticket lifecycle tracking
+
+Dashboard
+
+- Total Tickets
+- Open Tickets
+- In Progress Tickets
+- Closed Tickets
+- Recent Ticket Activity
+
+Search & Filtering
+
+- Search tickets dynamically
+- Filter tickets by status
+- Quick ticket discovery
+
+User Experience
+
+- Responsive SaaS-style UI
+- Clean dashboard layout
+- Custom 404 Page
+- Loading states
+- Error handling
+- React Router navigation
+
+---
+
+🛠️ Tech Stack
+
+Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios
+- React Router
+
+Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+
+Deployment
+
+- Frontend → Netlify
+- Backend → Render
+
+---
+
+📁 Project Structure
+
+Customer-Support-Ticket-CRM/
 │
-├── frontend/
-│   ├── src/
+├── src/
+│   ├── api/
 │   ├── components/
 │   ├── pages/
-│   └── layouts/
+│   ├── layouts/
+│   ├── context/
+│   └── assets/
 │
 ├── backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── models/
 │   ├── config/
-│   └── utils/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── server.js
+│   └── package.json
 │
+├── public/
+├── package.json
+├── vite.config.ts
 └── README.md
-```
 
 ---
 
-# Installation
+🗄️ Database Design
 
-## Clone Repository
+Ticket Schema
 
-```bash
-git clone https://github.com/your-username/support-crm.git
-cd support-crm
-```
-
----
-
-# Backend Setup
-
-```bash
-cd backend
-npm install
-```
-
-Create `.env` file:
-
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-```
-
-Run backend:
-
-```bash
-npm run dev
-```
+{
+  ticketId,
+  customerName,
+  customerEmail,
+  subject,
+  description,
+  status,
+  priority,
+  category,
+  assignee,
+  comments,
+  createdAt,
+  updatedAt
+}
 
 ---
 
-# Frontend Setup
+🚀 REST API Endpoints
 
-```bash
-cd frontend
-npm install
-```
+Get All Tickets
 
-Run frontend:
-
-```bash
-npm run dev
-```
-
----
-
-# API Endpoints
-
-## Create Ticket
-
-```http
-POST /api/tickets
-```
-
-## Get All Tickets
-
-```http
 GET /api/tickets
-```
-
-## Get Single Ticket
-
-```http
-GET /api/tickets/:id
-```
-
-## Update Ticket
-
-```http
-PUT /api/tickets/:id
-```
 
 ---
 
-# Environment Variables
+Get Ticket By ID
 
-## Backend `.env`
+GET /api/tickets/:id
 
-```env
+---
+
+Create Ticket
+
+POST /api/tickets
+
+Example Request:
+
+{
+  "customerName": "John Doe",
+  "customerEmail": "john@example.com",
+  "subject": "Login Issue",
+  "description": "Unable to access dashboard"
+}
+
+---
+
+Update Ticket
+
+PUT /api/tickets/:id
+
+Example Request:
+
+{
+  "status": "Closed"
+}
+
+---
+
+⚙️ Environment Variables
+
+Backend (.env)
+
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-```
+CLIENT_URL=http://localhost:5173
+NODE_ENV=development
 
 ---
 
-# Future Improvements
+Frontend (.env)
 
-* Authentication & Authorization
-* Role-based Access
-* Email Notifications
-* Analytics Dashboard
-* Real-time Updates
-* File Attachments
-
+VITE_API_URL=http://localhost:5000/api
 
 ---
 
+💻 Local Installation
+
+Clone Repository
+
+git clone https://github.com/your-username/customer-support-ticket-crm.git
+cd customer-support-ticket-crm
+
+---
+
+Backend Setup
+
+cd backend
+
+npm install
+
+npm run dev
+
+Backend runs on:
+
+http://localhost:5000
+
+---
+
+Frontend Setup
+
+cd src
+
+npm install
 
 
-# Author
+npm run dev
+
+Frontend runs on:
+
+http://localhost:5173
+
+---
+
+🌍 Production Deployment
+
+Frontend (Netlify)
+
+1. Build the project
+
+npm run build
+
+2. Upload the generated "dist" folder to Netlify
+
+3. Configure environment variable:
+
+VITE_API_URL=https://customer-support-crm-xsrt.onrender.com/api
+
+---
+
+Backend (Render)
+
+Environment Variables
+
+MONGO_URI=your_mongodb_connection_string
+CLIENT_URL=https://customer-support-crm.netlify.app
+NODE_ENV=production
+
+Build Command
+
+npm install
+
+Start Command
+
+npm start
+
+---
+
+📈 Key Highlights
+
+- Full-stack CRM architecture
+- RESTful API integration
+- MongoDB data persistence
+- Responsive SaaS-style dashboard
+- Dynamic ticket management system
+- Production deployment on Netlify & Render
+- Reusable component architecture
+- Real-time frontend/backend synchronization
+- Search & filtering functionality
+- Clean modular backend structure
+
+---
+
+📸 Screenshots
+
+Add screenshots of:
+
+- Dashboard
+- Ticket List
+- Ticket Details
+- Create Ticket Form
+- Search & Filter
+- 404 Page
+
+---
+
+🔮 Future Improvements
+
+- Authentication & Authorization
+- Role-Based Access Control
+- Email Notifications
+- File Attachments
+- Advanced Analytics
+- Real-Time Updates
+- Ticket Assignment Workflows
+
+---
+
+👨‍💻 Author
 
 Piyush Khandait
 
-Piyush Khandait
+Information Technology Engineering Student passionate about Full Stack Development, SaaS Products, and Scalable Software Engineering.
+
+---
+
+⭐ If you found this project useful, consider giving it a star.```
+
+---
+
